@@ -18,7 +18,7 @@ ini_set('display_errors', 1);
 
 // URL base del proyecto
 // Ajustar según la estructura de tu servidor local
-define('BASE_URL', 'http://localhost/turismo-coroico/');
+define('BASE_URL', 'http://localhost:81/turismo-coroico/');
 
 // Nombre del sitio
 define('SITE_NAME', 'Turismo Coroico');

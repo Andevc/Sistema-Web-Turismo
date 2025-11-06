@@ -1,0 +1,37 @@
+# =====================================================
+# Protección del directorio de uploads
+# Prevenir ejecución de scripts PHP en este directorio
+# =====================================================
+
+# Denegar acceso a archivos PHP
+<FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|sh|cgi)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Permitir solo archivos de imagen
+<FilesMatch "\.(jpg|jpeg|png|gif|svg|webp)$">
+    Order allow,deny
+    Allow from all
+</FilesMatch>
+
+# Prevenir listado de directorios
+Options -Indexes
+
+# Headers de seguridad para imágenes
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# Limitar tamaño de archivos
+LimitRequestBody 10485760
+
+# Cache para imágenes
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
