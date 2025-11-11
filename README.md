@@ -7,16 +7,16 @@ Sistema web de gestión turística para Coroico, La Paz - Bolivia. Desarrollado 
 Sistema que permite a turistas explorar lugares turísticos, reservar tours y compartir opiniones, mientras que los administradores gestionan el contenido y visualizan estadísticas.
 
 ## 🎯 10 Requerimientos CRUD Implementados
-- 1. Gestión de Usuarios 👤
-- 2. Gestión de Lugares Turísticos 🏔️
-- 3. Gestión de Tours 🎒
-- 4. Gestión de Reservas 📅
-- 5. Gestión de Comentarios 💬
-- 6. Búsqueda y Filtrado de Lugares 🔍
-- 7. Búsqueda y Filtrado de Tours 🔎
-- 8. Dashboard de Administrador 📊
-- 9. Historial de Reservas del Usuario 📜
-- 10. Sistema de Calificaciones por Lugar ⭐
+1. Gestión de Usuarios 👤
+2. Gestión de Lugares Turísticos 🏔️
+3. Gestión de Tours 🎒
+4. Gestión de Reservas 📅
+5. Gestión de Comentarios 💬
+6. Búsqueda y Filtrado de Lugares 🔍
+7. Búsqueda y Filtrado de Tours 🔎
+8. Dashboard de Administrador 📊
+9. Historial de Reservas del Usuario 📜
+10. Sistema de Calificaciones por Lugar ⭐
 
 ### 1. Gestión de Usuarios 👤
 **Operaciones CRUD completas sobre la tabla `usuarios`**
