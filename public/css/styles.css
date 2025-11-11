@@ -73,8 +73,9 @@ a:hover {
 }
 
 .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 1.5rem;
     margin: 2rem 0;
 }
@@ -258,10 +259,14 @@ a:hover {
    Hero Section
    ===================================================== */
 .hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    height: 500px;
+    background: linear-gradient(to bottom, #1a3009ee, #0000006e), url('../img/banner-bg.jpg');
+    background-size: cover;
+    background-position: center;
     color: var(--color-white);
     padding: 5rem 0;
     text-align: center;
+
 }
 
 .hero-content h1 {
@@ -279,6 +284,7 @@ a:hover {
     gap: 1rem;
     justify-content: center;
 }
+
 
 /* =====================================================
    Sections
@@ -954,7 +960,7 @@ a:hover {
 
 .stat-content h3 {
     font-size: 2rem;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.25rem; 
 }
 
 .quick-actions {

@@ -32,11 +32,19 @@ class TourController {
         ];
 
         // Buscar tours con filtros
-        if (!empty($filtros['busqueda']) || $filtros['precio_min'] !== '' || $filtros['precio_max'] !== '') {
+        // Si hay cualquier filtro, incluso solo ordenamiento, usar buscar()
+        if (
+            !empty($filtros['busqueda']) ||
+            $filtros['precio_min'] !== '' ||
+            $filtros['precio_max'] !== '' ||
+            ($filtros['orden'] !== 'nombre_asc') || 
+            ($filtros['orden'] !== 'nombre_desc') // ← importante
+        ) {
             $tours = $this->tourModel->buscar($filtros);
         } else {
             $tours = $this->tourModel->getAll();
         }
+
 
         require_once __DIR__ . '/../views/tours/index.php';
     }

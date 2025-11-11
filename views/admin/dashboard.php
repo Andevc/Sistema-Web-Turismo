@@ -43,13 +43,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 </div>
             </div>
             
-            <div class="stat-card highlight">
-                <div class="stat-icon">💰</div>
-                <div class="stat-content">
-                    <h3><?php echo formatearPrecio($ingresosTotales); ?></h3>
-                    <p>Ingresos Totales</p>
-                </div>
-            </div>
+            
             
             <div class="stat-card">
                 <div class="stat-icon">💬</div>
@@ -57,6 +51,14 @@ require_once __DIR__ . '/../layouts/header.php';
                     <h3><?php echo $estadisticasComentarios['total_comentarios'] ?? 0; ?></h3>
                     <p>Comentarios</p>
                     <small>Promedio: <?php echo number_format($estadisticasComentarios['promedio_general'] ?? 0, 1); ?> ★</small>
+                </div>
+            </div>
+            
+            <div class="stat-card highlight">
+                <div class="stat-icon">💰</div>
+                <div class="stat-content">
+                    <h3><?php echo formatearPrecio($ingresosTotales); ?></h3>
+                    <p>Ingresos Totales</p>
                 </div>
             </div>
         </div>

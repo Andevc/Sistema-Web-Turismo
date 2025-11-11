@@ -45,8 +45,7 @@ class Tour extends Model {
             $data['descripcion'],
             $data['precio'],
             $data['cupo_maximo'],
-            $data['imagen_tour'] ?? 'default.jpg'
-        ]);
+            $data['imagen_tour'] ?? 'default.jpg']);
 
         if ($result) {
             return [
@@ -64,7 +63,8 @@ class Tour extends Model {
      * @param int $id
      * @param array $data
      * @return array [success, message]
-     */
+    */
+
     public function actualizar($id, $data) {
         // Validar campos requeridos
         $errors = $this->validateRequired($data, [
@@ -94,11 +94,8 @@ class Tour extends Model {
         return ['success' => false, 'message' => 'Error al actualizar el tour'];
     }
 
-    /**
-     * Busca tours con filtros
-     * @param array $filtros [precio_min, precio_max, busqueda, orden]
-     * @return array
-     */
+    
+
     public function buscar($filtros = []) {
         $sql = "SELECT * FROM tours WHERE 1=1";
         $params = [];
