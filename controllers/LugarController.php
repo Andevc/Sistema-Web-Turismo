@@ -140,17 +140,17 @@ class LugarController {
             redirect('');
         }
 
-        $id = $_GET['id'] ?? null;
+        $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
 
         if (!$id) {
-            setFlashMessage('Lugar no encontrado', 'error');
+            setFlashMessage('Lugar no encontrado - ID no proporcionado', 'error');
             redirect('lugares');
         }
 
         $lugar = $this->lugarModel->getById($id);
 
         if (!$lugar) {
-            setFlashMessage('Lugar no encontrado', 'error');
+            setFlashMessage('Lugar no encontrado - No existe en la base de datos (ID: ' . $id . ')', 'error');
             redirect('lugares');
         }
 

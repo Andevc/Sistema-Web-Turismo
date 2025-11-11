@@ -14,6 +14,23 @@ class LugarTuristico extends Model {
     }
 
     /**
+     * Override del método getById para usar la columna correcta
+     * @param int $id
+     * @return array|null
+     */
+    public function getById($id) {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM lugares_turisticos WHERE id_lugar = ?");
+            $stmt->execute([$id]);
+            $result = $stmt->fetch();
+            return $result ? $result : null;
+        } catch (PDOException $e) {
+            error_log("Error en LugarTuristico::getById(): " . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
      * Crea un nuevo lugar turístico
      * @param array $data
      * @return array [success, message, id?]
@@ -221,11 +238,19 @@ class LugarTuristico extends Model {
             ];
         }
 
-        if ($this->delete($id)) {
-            return ['success' => true, 'message' => 'Lugar turístico eliminado exitosamente'];
+        // Eliminar usando la columna correcta
+        try {
+            $stmt = $this->db->prepare("DELETE FROM lugares_turisticos WHERE id_lugar = ?");
+            $success = $stmt->execute([$id]);
+            
+            if ($success) {
+                return ['success' => true, 'message' => 'Lugar turístico eliminado exitosamente'];
+            }
+            return ['success' => false, 'message' => 'Error al eliminar el lugar turístico'];
+        } catch (PDOException $e) {
+            error_log("Error al eliminar lugar: " . $e->getMessage());
+            return ['success' => false, 'message' => 'Error al eliminar el lugar turístico'];
         }
-
-        return ['success' => false, 'message' => 'Error al eliminar el lugar turístico'];
     }
 
     /**

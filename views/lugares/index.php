@@ -64,7 +64,7 @@ require_once __DIR__ . '/../layouts/header.php';
         <div class="card-grid">
             <?php foreach ($lugares as $lugar): ?>
             <div class="card">
-                <div class="card-image" style="background: linear-gradient(135deg, #2d5016 0%, #4a9d5f 100%);">
+                <div class="card-image" style="background: <?php echo (!empty($lugar['imagen_lugar']) && $lugar['imagen_lugar'] !== 'default.jpg') ? 'url(' . url('public/uploads/lugares/' . $lugar['imagen_lugar']) . ') center/cover' : 'linear-gradient(135deg, #2d5016 0%, #4a9d5f 100%)'; ?>;">
                     <span class="card-category"><?php echo ucfirst($lugar['categoria']); ?></span>
                 </div>
                 

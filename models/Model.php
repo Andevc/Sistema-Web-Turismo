@@ -38,12 +38,16 @@ class Model {
      */
     public function getById($id) {
         try {
-            $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE id_{$this->getSingularTable()} = ?");
+            // Determinar el nombre de la columna ID según la tabla
+            $idColumn = 'id_' . $this->getSingularTable();
+            
+            $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE {$idColumn} = ?");
             $stmt->execute([$id]);
             $result = $stmt->fetch();
             return $result ? $result : null;
         } catch (PDOException $e) {
             error_log("Error en getById(): " . $e->getMessage());
+            error_log("Tabla: {$this->table}, ID Column: {$idColumn}, ID: {$id}");
             return null;
         }
     }
