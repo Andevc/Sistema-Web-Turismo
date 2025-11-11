@@ -7,6 +7,7 @@
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../models/Tour.php';
 require_once __DIR__ . '/../models/Reserva.php';
+require_once __DIR__ . '/../helpers/Upload.php';
 
 class TourController {
     

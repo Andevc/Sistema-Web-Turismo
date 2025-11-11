@@ -37,14 +37,15 @@ class Tour extends Model {
             return ['success' => false, 'message' => 'El cupo máximo debe ser mayor a 0'];
         }
 
-        $sql = "INSERT INTO tours (nombre, descripcion, precio, cupo_maximo) 
-                VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO tours (nombre, descripcion, precio, cupo_maximo, imagen_tour) 
+                VALUES (?, ?, ?, ?, ?)";
         
         $result = $this->execute($sql, [
             $data['nombre'],
             $data['descripcion'],
             $data['precio'],
-            $data['cupo_maximo']
+            $data['cupo_maximo'],
+            $data['imagen_tour'] ?? 'default.jpg'
         ]);
 
         if ($result) {

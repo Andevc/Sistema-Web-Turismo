@@ -10,7 +10,7 @@ require_once __DIR__ . '/../layouts/header.php';
             
             <h2>Agregar Nuevo Lugar Turístico</h2>
             
-            <form method="POST" action="<?php echo url('lugares/guardar'); ?>" class="form">
+            <form method="POST" action="<?php echo url('lugares/guardar'); ?>" class="form" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label for="nombre">Nombre del Lugar *</label>
@@ -55,6 +55,12 @@ require_once __DIR__ . '/../layouts/header.php';
                         <label for="horario_cierre">Horario de Cierre</label>
                         <input type="time" id="horario_cierre" name="horario_cierre" class="form-control">
                     </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="imagen_lugar">Imagen del Lugar</label>
+                    <input type="file" id="imagen_lugar" name="imagen_lugar" class="form-control" accept="image/*">
+                    <small class="form-text">Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 5MB</small>
                 </div>
                 
                 <div class="form-actions">

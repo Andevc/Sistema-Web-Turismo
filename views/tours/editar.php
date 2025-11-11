@@ -10,7 +10,7 @@ require_once __DIR__ . '/../layouts/header.php';
             
             <h2>Editar Tour</h2>
             
-            <form method="POST" action="<?php echo url('tours/actualizar'); ?>" class="form">
+            <form method="POST" action="<?php echo url('tours/actualizar'); ?>" class="form" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo $tour['id_tour']; ?>">
                 
                 <div class="form-group">
@@ -36,6 +36,18 @@ require_once __DIR__ . '/../layouts/header.php';
                         <input type="number" id="cupo_maximo" name="cupo_maximo" class="form-control" 
                                min="1" value="<?php echo $tour['cupo_maximo']; ?>" required>
                     </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="imagen_tour">Cambiar Imagen del Tour</label>
+                    <?php if (!empty($tour['imagen_tour']) && $tour['imagen_tour'] !== 'default.jpg'): ?>
+                    <div class="current-image">
+                        <img src="<?php echo url('public/uploads/tours/' . $tour['imagen_tour']); ?>" alt="Imagen actual" style="max-width: 200px; margin-bottom: 1rem; border-radius: 8px;">
+                        <p><small>Imagen actual</small></p>
+                    </div>
+                    <?php endif; ?>
+                    <input type="file" id="imagen_tour" name="imagen_tour" class="form-control" accept="image/*">
+                    <small class="form-text">Dejar vacío si no deseas cambiar la imagen</small>
                 </div>
                 
                 <div class="form-actions">

@@ -7,6 +7,7 @@
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../models/LugarTuristico.php';
 require_once __DIR__ . '/../models/Comentario.php';
+require_once __DIR__ . '/../helpers/Upload.php';
 
 class LugarController {
     
@@ -108,6 +109,17 @@ class LugarController {
             'imagen_lugar' => 'default.jpg'
         ];
 
+        // Procesar imagen si se subió
+        if (isset($_FILES['imagen_lugar']) && $_FILES['imagen_lugar']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $upload = Upload::imagen($_FILES['imagen_lugar'], 'lugares');
+            if ($upload['success']) {
+                $data['imagen_lugar'] = $upload['filename'];
+            } else {
+                setFlashMessage($upload['message'], 'error');
+                redirect('lugares/crear');
+            }
+        }
+
         $resultado = $this->lugarModel->crear($data);
 
         if ($resultado['success']) {
@@ -160,10 +172,18 @@ class LugarController {
             redirect('lugares');
         }
 
-        $id = $_POST['id'] ?? null;
+        $id = isset($_POST['id']) ? (int)$_POST['id'] : null;
 
         if (!$id) {
-            setFlashMessage('Lugar no encontrado', 'error');
+            setFlashMessage('Lugar no encontrado - ID no proporcionado', 'error');
+            redirect('lugares');
+        }
+
+        // Obtener lugar actual para mantener imagen si no se cambia
+        $lugarActual = $this->lugarModel->getById($id);
+        
+        if (!$lugarActual) {
+            setFlashMessage('Lugar no encontrado - No existe en la base de datos', 'error');
             redirect('lugares');
         }
 
@@ -175,8 +195,23 @@ class LugarController {
             'precio_entrada' => sanitize($_POST['precio_entrada'] ?? ''),
             'horario_apertura' => sanitize($_POST['horario_apertura'] ?? ''),
             'horario_cierre' => sanitize($_POST['horario_cierre'] ?? ''),
-            'imagen_lugar' => 'default.jpg'
+            'imagen_lugar' => $lugarActual['imagen_lugar'] ?? 'default.jpg'
         ];
+
+        // Procesar nueva imagen si se subió
+        if (isset($_FILES['imagen_lugar']) && $_FILES['imagen_lugar']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $upload = Upload::imagen($_FILES['imagen_lugar'], 'lugares');
+            if ($upload['success']) {
+                // Eliminar imagen anterior si no es default
+                if ($lugarActual['imagen_lugar'] !== 'default.jpg') {
+                    Upload::eliminar($lugarActual['imagen_lugar'], 'lugares');
+                }
+                $data['imagen_lugar'] = $upload['filename'];
+            } else {
+                setFlashMessage($upload['message'], 'error');
+                redirect('lugares/editar?id=' . $id);
+            }
+        }
 
         $resultado = $this->lugarModel->actualizar($id, $data);
 

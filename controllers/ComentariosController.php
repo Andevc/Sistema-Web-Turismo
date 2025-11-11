@@ -31,7 +31,7 @@ class ComentarioController {
             redirect('lugares');
         }
 
-        $id_lugar = $_POST['id_lugar'] ?? null;
+        $id_lugar = isset($_POST['id_lugar']) ? (int)$_POST['id_lugar'] : null;
         
         if (!$id_lugar) {
             setFlashMessage('Lugar no especificado', 'error');

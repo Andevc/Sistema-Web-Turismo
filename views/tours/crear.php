@@ -10,7 +10,7 @@ require_once __DIR__ . '/../layouts/header.php';
             
             <h2>Agregar Nuevo Tour</h2>
             
-            <form method="POST" action="<?php echo url('tours/guardar'); ?>" class="form">
+            <form method="POST" action="<?php echo url('tours/guardar'); ?>" class="form" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="nombre">Nombre del Tour *</label>
                     <input type="text" id="nombre" name="nombre" class="form-control" required>
@@ -34,6 +34,12 @@ require_once __DIR__ . '/../layouts/header.php';
                         <input type="number" id="cupo_maximo" name="cupo_maximo" class="form-control" 
                                min="1" required>
                     </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="imagen_tour">Imagen del Tour</label>
+                    <input type="file" id="imagen_tour" name="imagen_tour" class="form-control" accept="image/*">
+                    <small class="form-text">Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 5MB</small>
                 </div>
                 
                 <div class="form-actions">
