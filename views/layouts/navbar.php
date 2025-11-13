@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-brand">
             <a href="<?php echo url(''); ?>">
-                <h1>🏔️ <?php echo SITE_NAME; ?></h1>
+                <h1><?php echo SITE_NAME; ?></h1>
             </a>
         </div>
         
